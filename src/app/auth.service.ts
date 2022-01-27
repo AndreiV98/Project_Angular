@@ -22,14 +22,15 @@ export class AuthService {
   }
 
   login(username: string, password: string): Observable<boolean> {
-    let headers = new HttpHeaders();
-    headers.append('content-type', 'application/x-www-form-urlencoded');
+    // let headers = new HttpHeaders().set('content-type', 'application/x-www-form-urlencoded');
+    // headers.append('content-type', 'application/x-www-form-urlencoded');
+    const headers = new HttpHeaders({ 'Authorization': 'Basic dGVzdDp0ZXN0', 'content-type': 'application/x-www-form-urlencoded' })
     let body = new HttpParams();
     body.set('username', username);
     body.set('password', password);
 
 
-    return this.http.post('http://127.0.0.1:8000/api/login_check', body ,{headers : headers} )
+    return this.http.post('http://127.0.0.1:8000/api/login_check', body)
       .pipe(map((response: any) => {
         const token = response.json() && response.json().token;
         if (token) {

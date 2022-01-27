@@ -9,13 +9,27 @@ import {AuthService} from '../auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  username: string | undefined;
-  password: string | undefined;
-  error: string | undefined;
+  username!: string;
+  password!: string;
+  error!: string;
 
-  constructor() { }
+  constructor(private router: Router,
+    private authenticationService: AuthService) { }
 
   ngOnInit(): void {
+    this.authenticationService.logout();
   }
 
+  login(e: { preventDefault: () => void; }) {
+
+    e.preventDefault();
+ 
+    this.authenticationService.login(this.username, this.password)
+      .subscribe(result => {
+ 
+        console.log(result);
+        this.router.navigate(['/dashboard']);
+ 
+      }, loginError => this.error = loginError.message + ' : verify  your username or password !  ');
+   }
 }
