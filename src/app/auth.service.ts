@@ -22,9 +22,12 @@ export class AuthService {
   }
 
   login(username: string, password: string): Observable<boolean> {
-    // let headers = new HttpHeaders().set('content-type', 'application/x-www-form-urlencoded');
-    // headers.append('content-type', 'application/x-www-form-urlencoded');
-    const headers = new HttpHeaders({ 'Authorization': 'Basic dGVzdDp0ZXN0', 'content-type': 'application/x-www-form-urlencoded' })
+    let headers = new HttpHeaders();
+    headers.append('content-type', 'application/x-www-form-urlencoded');
+    //const headers = new HttpHeaders({ 'Authorization': 'Basic dGVzdDp0ZXN0', 'content-type': 'application/x-www-form-urlencoded', 'Access-Control-Allow-Origin': 'http://localhost:8000', 'Access-Control-Allow-Credentials': 'true'})
+
+    // headers.append('Access-Control-Allow-Origin', 'http://localhost:4200');
+    // headers.append('Access-Control-Allow-Credentials', 'true');
     let body = new HttpParams();
     body.set('username', username);
     body.set('password', password);
