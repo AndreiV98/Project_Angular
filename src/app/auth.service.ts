@@ -22,20 +22,30 @@ export class AuthService {
   }
 
   login(username: string, password: string): Observable<boolean> {
-    let headers = new HttpHeaders();
-    headers.append('content-type', 'application/x-www-form-urlencoded');
-    //const headers = new HttpHeaders({ 'Authorization': 'Basic dGVzdDp0ZXN0', 'content-type': 'application/x-www-form-urlencoded', 'Access-Control-Allow-Origin': 'http://localhost:8000', 'Access-Control-Allow-Credentials': 'true'})
+    const headers: HttpHeaders = new HttpHeaders({
+      'content-type': 'application/x-www-form-urlencoded'
+  });
+
+  let params: HttpParams = new HttpParams();
+  params = params.set('username', username);
+  params = params.set('password', password);
+    //let headers = new HttpHeaders();
+    // headers.append('content-type', 'application/x-www-form-urlencoded');
+    // const headers = new HttpHeaders({ 'Authorization': 'Basic dGVzdDp0ZXN0', 'content-type': 'application/x-www-form-urlencoded', 'Access-Control-Allow-Origin': 'http://localhost:8000', 'Access-Control-Allow-Credentials': 'true'})
 
     // headers.append('Access-Control-Allow-Origin', 'http://localhost:4200');
     // headers.append('Access-Control-Allow-Credentials', 'true');
+    //headers.set('content-type', 'application/x-www-form-urlencoded');
     let body = new HttpParams();
     body.set('username', username);
     body.set('password', password);
 
 
-    return this.http.post('http://127.0.0.1:8000/api/login_check', body)
+    return this.http.post('http://127.0.0.1:8000/api/login_check', params, {headers : headers})
       .pipe(map((response: any) => {
-        const token = response.json() && response.json().token;
+        // const tok = response;
+        // const token = response.data.json() && response.data.json().token;
+        const token = response.token;
         if (token) {
           this.token = token;
 
