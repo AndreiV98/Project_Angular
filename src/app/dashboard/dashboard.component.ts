@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {AuthService} from '../auth.service';
+import {Router} from '@angular/router';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -9,7 +12,7 @@ export class DashboardComponent implements OnInit {
   userForm!: FormGroup;
   listData: any;
 
-  constructor(private fb:FormBuilder) {
+  constructor(private fb:FormBuilder, private authenticationService: AuthService, private router: Router) {
       this.listData = [];
 
       this.userForm = this.fb.group ({
@@ -35,6 +38,12 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
+
+  logout() {
+    this.authenticationService.logout();
+
+    this.router.navigate(['/login']);
+   }
 
   ngOnInit(): void {
   }

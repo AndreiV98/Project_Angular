@@ -43,7 +43,6 @@ export class AuthService {
 
     return this.http.post('http://127.0.0.1:8000/api/login_check', params, {headers : headers})
       .pipe(map((response: any) => {
-        // const tok = response;
         // const token = response.data.json() && response.data.json().token;
         const token = response.token;
         if (token) {

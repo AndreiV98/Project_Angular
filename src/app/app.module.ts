@@ -14,7 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 const routes: Routes = [
   {path: '', component: AppComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'dashboard', component: DashboardComponent}
+  {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]}
 ]
 
 @NgModule({
