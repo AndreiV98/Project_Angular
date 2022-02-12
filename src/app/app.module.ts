@@ -10,18 +10,21 @@ import { LoginComponent } from './login/login.component';
 import {Routes, RouterModule} from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
+import { UserslistComponent } from './userslist/userslist.component';
 
 const routes: Routes = [
   {path: '', component: AppComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]}
+  {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
+  {path: 'userslist', component: UserslistComponent, canActivate: [AuthGuard]},
 ]
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    UserslistComponent
   ],
   imports: [
     BrowserModule,
